@@ -24,7 +24,6 @@ local function get_substitution_from_visual_selection()
   local start_pos, end_pos = get_visual_range()
 
   if not is_selection_one_line(start_pos, end_pos) then
-    vim.notify('Visual range spans more than one line, cannot substitute', vim.log.levels.WARN)
     return nil
   end
 
@@ -39,25 +38,33 @@ local mode_to_substitution_function = {
 
 local function get_substitution_word()
   local mode = vim.fn.mode()
+  if mode == 'V' then
+    return nil
+  end
+
   local substitution_function = mode_to_substitution_function[mode]
   return substitution_function and substitution_function()
 end
 
 local function is_blank(s)
-  return s == nil or s:match('^%s*$') ~= nil
+  return s:match('^%s*$') ~= nil
 end
 
 local function substitute_current_word()
   local word = get_substitution_word()
 
-  if is_blank(word) then
-    vim.notify('Word is blank, cannot substitute', vim.log.levels.INFO)
-    return
+  if vim.fn.mode() == 'V' then
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', false, true, true), 'nx', false)
+    vim.notify('Visual line mode not supported for substitution selection', vim.log.levels.WARN)
+  elseif word == nil then
+    vim.notify('Cannot substitute this selection', vim.log.levels.INFO)
+  elseif is_blank(word) then
+    vim.notify('Selection is blank, cannot substitute', vim.log.levels.INFO)
+  else
+    local pattern = ':%s/\\v(' .. word .. ')//gc'
+    local cursor_move = vim.api.nvim_replace_termcodes('<Left><Left><Left>', true, false, true)
+    vim.api.nvim_feedkeys(pattern .. cursor_move, 'n', true)
   end
-
-  local pattern = ':%s/\\v(' .. word .. ')//gc'
-  local cursor_move = vim.api.nvim_replace_termcodes('<Left><Left><Left>', true, false, true)
-  vim.api.nvim_feedkeys(pattern .. cursor_move, 'n', true)
 end
 
-vim.keymap.set({ 'n', 'v' }, '<leader>e', substitute_current_word, { desc = 'Substitute current word in file' })
+vim.keymap.set({ 'n', 'x' }, '<leader>e', substitute_current_word, { desc = 'Substitute current word in file' })
