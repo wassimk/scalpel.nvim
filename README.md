@@ -8,7 +8,8 @@ Install **scalpel** using your plugin manager of choice. For example, here it is
 ```lua
 {
   'wassimk/scalpel.nvim',
-  version = "*"
+  version = "*",
+  config = true
 }
 ```
 
