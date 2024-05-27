@@ -2,11 +2,11 @@
 -- scalpel.lua
 --
 
-local function selection_is_one_line(start_pos, end_pos)
+local function is_selection_one_line(start_pos, end_pos)
   return start_pos[1] == end_pos[1]
 end
 
-local function selection()
+local function get_visual_range()
   -- Exit visual mode to set the marks for visual range
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', false, true, true), 'nx', false)
 
@@ -16,41 +16,35 @@ local function selection()
   return start_pos, end_pos
 end
 
-local function get_normal_substitution()
-  local word = vim.fn.expand('<cword>')
-  return word
+local function get_substitution_from_normal_mode()
+  return vim.fn.expand('<cword>')
 end
 
-local function get_visual_substitution()
-  local start_pos, end_pos = selection()
+local function get_substitution_from_visual_selection()
+  local start_pos, end_pos = get_visual_range()
 
-  if selection_is_one_line(start_pos, end_pos) then
-    local line = vim.api.nvim_buf_get_lines(0, start_pos[1] - 1, start_pos[1], false)[1]
-    local word = line:sub(start_pos[2] + 1, end_pos[2] + 1)
-    return word
-  else
+  if not is_selection_one_line(start_pos, end_pos) then
     vim.notify('Visual range spans more than one line, cannot substitute', vim.log.levels.WARN)
     return nil
   end
+
+  local line = vim.api.nvim_buf_get_lines(0, start_pos[1] - 1, start_pos[1], false)[1]
+  return line:sub(start_pos[2] + 1, end_pos[2] + 1)
 end
 
-local get_substitution_word = function()
-  local word
-  if vim.fn.mode() == 'n' then
-    word = get_normal_substitution()
-  elseif vim.fn.mode() == 'v' then
-    word = get_visual_substitution()
-  end
+local mode_to_substitution_function = {
+  n = get_substitution_from_normal_mode,
+  v = get_substitution_from_visual_selection,
+}
 
-  return word
+local function get_substitution_word()
+  local mode = vim.fn.mode()
+  local substitution_function = mode_to_substitution_function[mode]
+  return substitution_function and substitution_function()
 end
 
 local function is_blank(s)
-  if s == nil then
-    return true
-  end
-
-  return s:match('^%s*$') ~= nil
+  return s == nil or s:match('^%s*$') ~= nil
 end
 
 local function substitute_current_word()
@@ -66,4 +60,4 @@ local function substitute_current_word()
   vim.api.nvim_feedkeys(pattern .. cursor_move, 'n', true)
 end
 
-vim.keymap.set({ 'n', 'v' }, '<leader>e', substitute_current_word, { desc = 'Substite current word in file' })
+vim.keymap.set({ 'n', 'v' }, '<leader>e', substitute_current_word, { desc = 'Substitute current word in file' })
