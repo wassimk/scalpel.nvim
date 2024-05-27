@@ -1,5 +1,5 @@
 # scalpel.nvim
-This Neovim plugin provides a quick find/replace within a file with the `<leader>e` keymap. It calls the built-in `substitution` command and sets up up as much as it can to prevent you from typing so much.
+This Neovim plugin provides a quick find/replace within a buffer with the `<leader>e` keymap. It calls the built-in [`substitution`](https://neovim.io/doc/user/usr_10.html#10.2) command and sets up as much as possible to prevent you from typing so much.
 
 ### Installation
 
