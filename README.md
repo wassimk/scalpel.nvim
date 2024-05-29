@@ -20,7 +20,7 @@ Move the cursor over the word to be substituted and press `<leader>e`.
 
 It will start a substitution for the word under the cursor.
 
-Now press `/` and start typing your substitution. It also captures the word being substituted, so if you need it in your substitution use `\1`.
+Now start typing your substitution. It also captures the word being substituted, so if you need it in your substitution use `\1`.
 
 ### Thanks
 
