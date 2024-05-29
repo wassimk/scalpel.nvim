@@ -11,6 +11,7 @@ The following example shows the installation process using [lazy.nvim](https://g
 ```lua
 return {
   'wassimk/scalpel.nvim',
+  version = "*",
   config = true,
   keys = {
     {
