@@ -1,28 +1,40 @@
 # scalpel.nvim
 
-This Neovim plugin provides a quick find/replace within a buffer with the `<leader>e` keymap. It calls the built-in [`substitution`](https://neovim.io/doc/user/usr_10.html#10.2) command and sets up as much as possible to keep you from typing so much.
+**scalpel.nvim** is a Neovim plugin designed to expedite your find/replace workflow within a buffer. It sets up Neovim's native [`substitution`](https://neovim.io/doc/user/usr_10.html#10.2) command, automating some steps to eliminate excessive typing.
 
-### Installation
+## Installation
 
-Install **scalpel** using your plugin manager of choice. For example, here it is using [lazy.nvim](https://github.com/folke/lazy.nvim).
+Install **scalpel.nvim** with your preferred plugin manager. 
+
+The following example shows the installation process using [lazy.nvim](https://github.com/folke/lazy.nvim). It sets the scalpel substitute keymap to `<leader>e`.
 
 ```lua
-{
+return {
   'wassimk/scalpel.nvim',
-  version = "*",
-  config = true
+  config = true,
+  keys = {
+    {
+      '<leader>e',
+      function()
+        require('scalpel').substitute()
+      end,
+      mode = { 'n', 'x' },
+      desc = 'substitute word(s)',
+    },
+  },
 }
 ```
 
-### Usage
+## How to Use
 
-Move the cursor over the word to be substituted and press `<leader>e`.
+Using **scalpel.nvim** is simple:
 
-It will start a substitution for the word under the cursor.
+1. Move the cursor over the word you wish to replace.
+2. Trigger the substitution with the `<leader>e` keymap.
+3. Begin typing your desired substitution and hit return. Note that the original word is being captured, so if you would like to incorporate it into your replacement, use `\1`.
 
-Now start typing your substitution. It also captures the word being substituted, so if you need it in your substitution use `\1`.
+This plugin also supports visual mode selection for substitutions within a single line.
 
-### Thanks
+## Acknowledgments
 
-For years, I used a plugin named [Scalpel](https://github.com/wincent/scalpel) for this. It's written in Vimscript, and this is my version written in Lua, for fun.
-
+This project was inspired by [Scalpel](https://github.com/wincent/scalpel), a Vimscript plugin I've used for many years. **scalpel.nvim** is my version reimagined and implemented in Lua for fun.
