@@ -24,5 +24,5 @@ Now press `/` and start typing your substitution. It also captures the word bein
 
 ### Thanks
 
-For years, I used a plugin named [scalpel](https://github.com/wincent/scalpel) for this. It's written in Vimscript, and this is my version written in Lua, for fun.
+For years, I used a plugin named [Scalpel](https://github.com/wincent/scalpel) for this. It's written in Vimscript, and this is my version written in Lua, for fun.
 
