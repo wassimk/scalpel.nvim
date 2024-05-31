@@ -9,7 +9,7 @@ Install **scalpel.nvim** with your preferred plugin manager.
 The following example shows the installation process using [lazy.nvim](https://github.com/folke/lazy.nvim). It sets the scalpel substitute keymap to `<leader>e`.
 
 ```lua
-return {
+{
   'wassimk/scalpel.nvim',
   version = "*",
   config = true,
