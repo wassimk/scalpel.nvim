@@ -30,16 +30,33 @@ The following example shows the installation process using [lazy.nvim](https://g
 }
 ```
 
+> [!NOTE]
+> You can set the keymap to anything you wish.
+
 ## Usage
 
-Using **scalpel.nvim** is simple:
+#### Normal Mode
 
-1. Move the cursor over the word you wish to replace.
-2. Trigger the substitution with the `<leader>e` keymap.
-3. Begin typing your desired substitution and hit return. Note that the original word is being captured, so if you would like to incorporate it into your replacement, use `\1`.
+1. Move the cursor over the word to replace
+2. Trigger the substitution with your keymap
+3. Begin typing the desired substitution and hit return
 
-This plugin also supports visual mode selection for substitutions within a single line.
+#### Visual Mode
 
+1. Use visual mode (`v`) to select the word(s) to replace within a *single line*
+2. Trigger the substitution with your keymap
+3. Begin typing the desired substitution and hit return
+
+#### Visual Line Mode
+
+1. Highlight word(s) to substitute with `*` or `/`
+2. Use visual line mode (`V`) to highlight the lines with the word(s) to substitute
+3. Trigger the substitution with your keymap
+4. Begin typing the desired substitution and hit return
+
+> [!TIP]
+> The word(s) being replaced during substitution are available in the replacement text using `&`.
+> 
 ## Acknowledgments
 
-This project was inspired by [Scalpel](https://github.com/wincent/scalpel), a Vimscript plugin I've used for many years. **scalpel.nvim** is my version reimagined and implemented in Lua for fun.
+This project was inspired by [Scalpel](https://github.com/wincent/scalpel), a Vimscript plugin I've used for many years. **scalpel.nvim** is my version, which was reimagined and implemented in Lua for fun.
