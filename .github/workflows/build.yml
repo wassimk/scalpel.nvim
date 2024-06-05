@@ -23,7 +23,7 @@ jobs:
           vimdoc: scalpel.nvim
           toc: true
           treesitter: true
-          docmappingprojectname: false
+          docmappingprojectname: true
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "build(docs): auto generate vim documentation"
