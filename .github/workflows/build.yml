@@ -14,8 +14,8 @@ jobs:
           version: latest
           args: --color always --check lua/
   docs:
-    runs-on: ubuntu-latest
     name: vimdoc
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: kdheepak/panvimdoc@main
@@ -23,3 +23,7 @@ jobs:
           vimdoc: scalpel.nvim
           toc: true
           treesitter: true
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "build(docs): auto generate vim documentation"
+          branch: ${{ github.head_ref }}
