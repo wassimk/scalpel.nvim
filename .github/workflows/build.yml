@@ -15,7 +15,7 @@ jobs:
           args: --color always --check lua/
   docs:
     runs-on: ubuntu-latest
-    name: pandoc to vimdoc
+    name: vimdoc
     steps:
       - uses: actions/checkout@v4
       - uses: kdheepak/panvimdoc@main
