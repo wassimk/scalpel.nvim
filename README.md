@@ -30,7 +30,7 @@ The following example shows the installation process using [lazy.nvim](https://g
 }
 ```
 
-## How to Use
+## Usage
 
 Using **scalpel.nvim** is simple:
 
