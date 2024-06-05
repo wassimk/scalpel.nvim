@@ -56,14 +56,15 @@ function M.substitute()
   local word = get_substitution_word()
 
   if vim.fn.mode() == 'V' then
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', false, true, true), 'nx', false)
-    vim.notify('Visual line mode not supported for substitution selection', vim.log.levels.WARN)
+    local pattern = ':s///gc'
+    local cursor_move = vim.api.nvim_replace_termcodes('<Left><Left><Left>', true, false, true)
+    vim.api.nvim_feedkeys(pattern .. cursor_move, 'n', true)
   elseif word == nil then
     vim.notify('Cannot substitute this selection', vim.log.levels.INFO)
   elseif is_blank(word) then
     vim.notify('Selection is blank, cannot substitute', vim.log.levels.INFO)
   else
-    local pattern = ':%s/\\v(' .. word .. ')//gc'
+    local pattern = ':%s/\\v' .. word .. '//gc'
     local cursor_move = vim.api.nvim_replace_termcodes('<Left><Left><Left>', true, false, true)
     vim.api.nvim_feedkeys(pattern .. cursor_move, 'n', true)
   end
