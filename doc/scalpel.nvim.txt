@@ -3,10 +3,14 @@
 ==============================================================================
 Table of Contents                             *scalpel.nvim-table-of-contents*
 
-  - scalpel.nvim                                   |scalpel.nvim-scalpel.nvim|
-1. Links                                                  |scalpel.nvim-links|
+1. scalpel.nvim                                    |scalpel.nvim-scalpel.nvim|
+  - Installation                      |scalpel.nvim-scalpel.nvim-installation|
+  - Usage                                    |scalpel.nvim-scalpel.nvim-usage|
+  - Acknowledgments                |scalpel.nvim-scalpel.nvim-acknowledgments|
+2. Links                                                  |scalpel.nvim-links|
 
-SCALPEL.NVIM                                       *scalpel.nvim-scalpel.nvim*
+==============================================================================
+1. scalpel.nvim                                    *scalpel.nvim-scalpel.nvim*
 
 **scalpel.nvim** is a Neovim plugin designed to expedite your find/replace
 workflow within a buffer. It sets up Neovim’s native |`substitution`|
@@ -15,7 +19,7 @@ command, automating some steps to eliminate some typing.
 <https://github.com/wassimk/scalpel.nvim/actions/workflows/build.yml>
 
 
-INSTALLATION ~
+INSTALLATION                          *scalpel.nvim-scalpel.nvim-installation*
 
 Install **scalpel.nvim** with your preferred plugin manager.
 
@@ -42,7 +46,7 @@ The following example shows the installation process using lazy.nvim
 <
 
 
-USAGE ~
+USAGE                                        *scalpel.nvim-scalpel.nvim-usage*
 
 Using **scalpel.nvim** is simple:
 
@@ -54,14 +58,14 @@ This plugin also supports visual mode selection for substitutions within a
 single line.
 
 
-ACKNOWLEDGMENTS ~
+ACKNOWLEDGMENTS                    *scalpel.nvim-scalpel.nvim-acknowledgments*
 
 This project was inspired by Scalpel <https://github.com/wincent/scalpel>, a
 Vimscript plugin I’ve used for many years. **scalpel.nvim** is my version
 reimagined and implemented in Lua for fun.
 
 ==============================================================================
-1. Links                                                  *scalpel.nvim-links*
+2. Links                                                  *scalpel.nvim-links*
 
 1. *scalpel-nvim demo*: demo.gif
 2. *build*: https://github.com/wassimk/scalpel.nvim/actions/workflows/build.yml/badge.svg
