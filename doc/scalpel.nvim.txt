@@ -14,7 +14,7 @@ Table of Contents                             *scalpel.nvim-table-of-contents*
 
 **scalpel.nvim** is a Neovim plugin designed to expedite your find/replace
 workflow within a buffer. It sets up Neovim’s native |`substitution`|
-command, automating some steps to eliminate some typing.
+command, automating some steps to reduce some typing.
 
 <https://github.com/wassimk/scalpel.nvim/actions/workflows/build.yml>
 
