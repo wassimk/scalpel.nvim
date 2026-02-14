@@ -70,6 +70,13 @@ The substitution reuses your last search pattern and is scoped to the selected l
 
 ## Development
 
+Run tests and lint:
+
+```shell
+make test
+make lint
+```
+
 Enable the local git hooks (one-time setup):
 
 ```shell
