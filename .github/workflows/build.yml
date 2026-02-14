@@ -12,7 +12,18 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           version: latest
-          args: --color always --check lua/
+          args: --color always --check lua/ tests/
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: rhysd/action-setup-vim@v1
+        with:
+          neovim: true
+          version: v0.10.0
+      - run: make test
   docs:
     name: vimdoc
     runs-on: ubuntu-latest
