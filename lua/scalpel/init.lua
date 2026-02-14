@@ -64,7 +64,8 @@ function M.substitute()
   elseif is_blank(word) then
     vim.notify('Selection is blank, cannot substitute', vim.log.levels.INFO)
   else
-    local pattern = ':%s/\\v' .. word .. '//gc'
+    local escaped = vim.fn.escape(word, '/\\')
+    local pattern = ':%s/\\v' .. escaped .. '//gc'
     local cursor_move = vim.api.nvim_replace_termcodes('<Left><Left><Left>', true, false, true)
     vim.api.nvim_feedkeys(pattern .. cursor_move, 'n', true)
   end

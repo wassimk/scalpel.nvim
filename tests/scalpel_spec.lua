@@ -79,6 +79,31 @@ describe('scalpel', function()
       end)
     end)
 
+    describe('escaping', function()
+      it('escapes forward slashes in visual selection', function()
+        helpers.set_mode('v')
+        helpers.set_visual_marks({ 1, 0 }, { 1, 6 })
+        helpers.set_buffer_lines({ 'foo/bar baz' })
+
+        scalpel.substitute()
+
+        local call = helpers.feedkeys_calls[2]
+        assert.truthy(call.keys:find('foo\\/bar'))
+        assert.truthy(call.keys:find('//gc'))
+      end)
+
+      it('escapes backslashes in visual selection', function()
+        helpers.set_mode('v')
+        helpers.set_visual_marks({ 1, 0 }, { 1, 6 })
+        helpers.set_buffer_lines({ 'foo\\bar baz' })
+
+        scalpel.substitute()
+
+        local call = helpers.feedkeys_calls[2]
+        assert.truthy(call.keys:find('foo\\\\bar'))
+      end)
+    end)
+
     describe('visual mode', function()
       -- Note: get_visual_range() calls nvim_feedkeys with <Esc> first,
       -- so visual mode tests have an extra feedkeys call at index 1.
