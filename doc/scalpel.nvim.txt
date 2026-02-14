@@ -75,6 +75,12 @@ VISUAL LINE MODE
 
   [!TIP] The word(s) being replaced during substitution are available in the
   replacement text using `&`.
+
+  [!NOTE] The search pattern uses Vim’s very magic mode (`\v`), so characters
+  like `.`, `+`, `*`, and `()` are treated as regex operators. This lets you use
+  regex in your search patterns without extra escaping. If you need to match
+  these characters literally, escape them with `\` (e.g. `\.` to match a
+  period).
   ACKNOWLEDGMENTS                    *scalpel.nvim-scalpel.nvim-acknowledgments*
 This project was inspired by Scalpel <https://github.com/wincent/scalpel>, a
 Vimscript plugin I’ve used for many years. **scalpel.nvim** is my version,
