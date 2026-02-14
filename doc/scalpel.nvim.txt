@@ -99,6 +99,13 @@ replacement immediately.
 
 DEVELOPMENT                            *scalpel.nvim-scalpel.nvim-development*
 
+Run tests and lint:
+
+>shell
+    make test
+    make lint
+<
+
 Enable the local git hooks (one-time setup):
 
 >shell
