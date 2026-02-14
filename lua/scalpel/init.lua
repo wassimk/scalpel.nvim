@@ -66,6 +66,15 @@ function M.substitute()
   else
     local escaped = vim.fn.escape(word, '/\\')
     vim.fn.setreg('/', '\\v' .. escaped)
+
+    local match_id = vim.fn.matchadd('Search', '\\v' .. escaped)
+    vim.api.nvim_create_autocmd('CmdlineLeave', {
+      once = true,
+      callback = function()
+        pcall(vim.fn.matchdelete, match_id)
+      end,
+    })
+
     local pattern = ':%s/\\v' .. escaped .. '//gc'
     local cursor_move = vim.api.nvim_replace_termcodes('<Left><Left><Left>', true, false, true)
     vim.api.nvim_feedkeys(pattern .. cursor_move, 'n', true)

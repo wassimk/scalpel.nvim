@@ -56,7 +56,7 @@ describe('scalpel', function()
         assert.truthy(call.keys:find('<Left><Left><Left>'))
       end)
 
-      it('sets the search register for hlsearch highlighting', function()
+      it('sets the search register', function()
         helpers.set_mode('n')
         helpers.set_expand('hello')
 
@@ -64,6 +64,27 @@ describe('scalpel', function()
 
         assert.equals('/', helpers.last_setreg_name)
         assert.equals('\\vhello', helpers.last_setreg_value)
+      end)
+
+      it('adds match highlight with Search group', function()
+        helpers.set_mode('n')
+        helpers.set_expand('hello')
+
+        scalpel.substitute()
+
+        assert.equals('Search', helpers.last_matchadd_group)
+        assert.equals('\\vhello', helpers.last_matchadd_pattern)
+      end)
+
+      it('registers CmdlineLeave autocmd to clean up highlight', function()
+        helpers.set_mode('n')
+        helpers.set_expand('hello')
+
+        scalpel.substitute()
+
+        assert.equals(1, #helpers.autocmd_events)
+        assert.equals('CmdlineLeave', helpers.autocmd_events[1].event)
+        assert.is_true(helpers.autocmd_events[1].opts.once)
       end)
 
       it('notifies when word is blank', function()
@@ -132,15 +153,15 @@ describe('scalpel', function()
         assert.truthy(call.keys:find('//gc'))
       end)
 
-      it('sets the search register for hlsearch highlighting', function()
+      it('adds match highlight with Search group', function()
         helpers.set_mode('v')
         helpers.set_visual_marks({ 1, 4 }, { 1, 8 })
         helpers.set_buffer_lines({ 'the hello world line' })
 
         scalpel.substitute()
 
-        assert.equals('/', helpers.last_setreg_name)
-        assert.equals('\\vhello', helpers.last_setreg_value)
+        assert.equals('Search', helpers.last_matchadd_group)
+        assert.equals('\\vhello', helpers.last_matchadd_pattern)
       end)
 
       it('extracts correct substring from line', function()
@@ -217,6 +238,14 @@ describe('scalpel', function()
         scalpel.substitute()
 
         assert.is_nil(helpers.last_setreg_name)
+      end)
+
+      it('does not add match highlight', function()
+        helpers.set_mode('V')
+
+        scalpel.substitute()
+
+        assert.is_nil(helpers.last_matchadd_group)
       end)
     end)
   end)

@@ -5,6 +5,10 @@ M.feedkeys_calls = {}
 M.notifications = {}
 M.last_setreg_name = nil
 M.last_setreg_value = nil
+M.last_matchadd_group = nil
+M.last_matchadd_pattern = nil
+M.matchdelete_called = false
+M.autocmd_events = {}
 
 -- Original functions
 local originals = {}
@@ -14,14 +18,21 @@ function M.setup_mocks()
   M.notifications = {}
   M.last_setreg_name = nil
   M.last_setreg_value = nil
+  M.last_matchadd_group = nil
+  M.last_matchadd_pattern = nil
+  M.matchdelete_called = false
+  M.autocmd_events = {}
 
   originals.mode = vim.fn.mode
   originals.expand = vim.fn.expand
   originals.setreg = vim.fn.setreg
+  originals.matchadd = vim.fn.matchadd
+  originals.matchdelete = vim.fn.matchdelete
   originals.feedkeys = vim.api.nvim_feedkeys
   originals.replace_termcodes = vim.api.nvim_replace_termcodes
   originals.buf_get_mark = vim.api.nvim_buf_get_mark
   originals.buf_get_lines = vim.api.nvim_buf_get_lines
+  originals.create_autocmd = vim.api.nvim_create_autocmd
   originals.notify = vim.notify
 
   -- Default mock: normal mode
@@ -38,6 +49,16 @@ function M.setup_mocks()
     M.last_setreg_value = value
   end
 
+  vim.fn.matchadd = function(group, pattern)
+    M.last_matchadd_group = group
+    M.last_matchadd_pattern = pattern
+    return 1
+  end
+
+  vim.fn.matchdelete = function(id)
+    M.matchdelete_called = true
+  end
+
   vim.api.nvim_feedkeys = function(keys, mode, escape_ks)
     table.insert(M.feedkeys_calls, { keys = keys, mode = mode, escape_ks = escape_ks })
   end
@@ -52,6 +73,11 @@ function M.setup_mocks()
 
   vim.api.nvim_buf_get_lines = function(buf, start_line, end_line, strict)
     return { 'some text here' }
+  end
+
+  vim.api.nvim_create_autocmd = function(event, opts)
+    table.insert(M.autocmd_events, { event = event, opts = opts })
+    return 1
   end
 
   vim.notify = function(msg, level)
@@ -91,10 +117,13 @@ function M.teardown_mocks()
   vim.fn.mode = originals.mode
   vim.fn.expand = originals.expand
   vim.fn.setreg = originals.setreg
+  vim.fn.matchadd = originals.matchadd
+  vim.fn.matchdelete = originals.matchdelete
   vim.api.nvim_feedkeys = originals.feedkeys
   vim.api.nvim_replace_termcodes = originals.replace_termcodes
   vim.api.nvim_buf_get_mark = originals.buf_get_mark
   vim.api.nvim_buf_get_lines = originals.buf_get_lines
+  vim.api.nvim_create_autocmd = originals.create_autocmd
   vim.notify = originals.notify
 end
 
