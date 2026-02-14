@@ -2,9 +2,7 @@
 
 **scalpel.nvim** is a Neovim plugin designed to expedite your find/replace workflow within a buffer. It sets up Neovim's native [`substitution`](https://neovim.io/doc/user/usr_10.html#10.2) command, automating some steps to reduce some typing.
 
-![scalpel-nvim demo](demo.gif)
-
-[![build](https://github.com/wassimk/scalpel.nvim/actions/workflows/build.yml/badge.svg)](https://github.com/wassimk/scalpel.nvim/actions/workflows/build.yml) ![release](https://img.shields.io/github/v/release/wassimk/scalpel.nvim?logo=github)
+![scalpel-nvim demo](scalpel.gif)
 
 ## Requirements
 

@@ -8,7 +8,7 @@ local function is_selection_one_line(start_pos, end_pos)
   return start_pos[1] == end_pos[1]
 end
 
-local function get_visual_range()
+local function get_visual()
   -- Exit visual mode to set the marks for visual range
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', false, true, true), 'nx', false)
 
@@ -23,7 +23,7 @@ local function get_substitution_from_normal_mode()
 end
 
 local function get_substitution_from_visual_selection()
-  local start_pos, end_pos = get_visual_range()
+  local start_pos, end_pos = get_visual()
 
   if not is_selection_one_line(start_pos, end_pos) then
     return nil
