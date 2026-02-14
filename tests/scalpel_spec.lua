@@ -56,6 +56,16 @@ describe('scalpel', function()
         assert.truthy(call.keys:find('<Left><Left><Left>'))
       end)
 
+      it('sets the search register for hlsearch highlighting', function()
+        helpers.set_mode('n')
+        helpers.set_expand('hello')
+
+        scalpel.substitute()
+
+        assert.equals('/', helpers.last_setreg_name)
+        assert.equals('\\vhello', helpers.last_setreg_value)
+      end)
+
       it('notifies when word is blank', function()
         helpers.set_mode('n')
         helpers.set_expand('   ')
@@ -120,6 +130,17 @@ describe('scalpel', function()
         assert.truthy(call.keys:find('hello'))
         assert.truthy(call.keys:find(':%%s/\\v'))
         assert.truthy(call.keys:find('//gc'))
+      end)
+
+      it('sets the search register for hlsearch highlighting', function()
+        helpers.set_mode('v')
+        helpers.set_visual_marks({ 1, 4 }, { 1, 8 })
+        helpers.set_buffer_lines({ 'the hello world line' })
+
+        scalpel.substitute()
+
+        assert.equals('/', helpers.last_setreg_name)
+        assert.equals('\\vhello', helpers.last_setreg_value)
       end)
 
       it('extracts correct substring from line', function()
@@ -188,6 +209,14 @@ describe('scalpel', function()
         scalpel.substitute()
 
         assert.equals(0, #helpers.notifications)
+      end)
+
+      it('does not set the search register', function()
+        helpers.set_mode('V')
+
+        scalpel.substitute()
+
+        assert.is_nil(helpers.last_setreg_name)
       end)
     end)
   end)

@@ -3,6 +3,8 @@ local M = {}
 -- Tracked values
 M.feedkeys_calls = {}
 M.notifications = {}
+M.last_setreg_name = nil
+M.last_setreg_value = nil
 
 -- Original functions
 local originals = {}
@@ -10,9 +12,12 @@ local originals = {}
 function M.setup_mocks()
   M.feedkeys_calls = {}
   M.notifications = {}
+  M.last_setreg_name = nil
+  M.last_setreg_value = nil
 
   originals.mode = vim.fn.mode
   originals.expand = vim.fn.expand
+  originals.setreg = vim.fn.setreg
   originals.feedkeys = vim.api.nvim_feedkeys
   originals.replace_termcodes = vim.api.nvim_replace_termcodes
   originals.buf_get_mark = vim.api.nvim_buf_get_mark
@@ -26,6 +31,11 @@ function M.setup_mocks()
 
   vim.fn.expand = function()
     return 'word'
+  end
+
+  vim.fn.setreg = function(name, value)
+    M.last_setreg_name = name
+    M.last_setreg_value = value
   end
 
   vim.api.nvim_feedkeys = function(keys, mode, escape_ks)
@@ -80,6 +90,7 @@ end
 function M.teardown_mocks()
   vim.fn.mode = originals.mode
   vim.fn.expand = originals.expand
+  vim.fn.setreg = originals.setreg
   vim.api.nvim_feedkeys = originals.feedkeys
   vim.api.nvim_replace_termcodes = originals.replace_termcodes
   vim.api.nvim_buf_get_mark = originals.buf_get_mark
