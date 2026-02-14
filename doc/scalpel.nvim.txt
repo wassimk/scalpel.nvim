@@ -4,6 +4,7 @@
 Table of Contents                             *scalpel.nvim-table-of-contents*
 
 1. scalpel.nvim                                    |scalpel.nvim-scalpel.nvim|
+  - Requirements                      |scalpel.nvim-scalpel.nvim-requirements|
   - Installation                      |scalpel.nvim-scalpel.nvim-installation|
   - Usage                                    |scalpel.nvim-scalpel.nvim-usage|
   - Acknowledgments                |scalpel.nvim-scalpel.nvim-acknowledgments|
@@ -17,6 +18,11 @@ workflow within a buffer. It sets up Neovim’s native |`substitution`|
 command, automating some steps to reduce some typing.
 
 <https://github.com/wassimk/scalpel.nvim/actions/workflows/build.yml>
+
+
+REQUIREMENTS                          *scalpel.nvim-scalpel.nvim-requirements*
+
+- Neovim >= 0.10.0
 
 
 INSTALLATION                          *scalpel.nvim-scalpel.nvim-installation*
@@ -51,26 +57,36 @@ The following example shows the installation process using lazy.nvim
 USAGE                                        *scalpel.nvim-scalpel.nvim-usage*
 
 
-NORMAL MODE
+NORMAL MODE ~
 
 1. Move the cursor over the word to replace
 2. Trigger the substitution with your keymap
 3. Begin typing the desired substitution and hit return
 
+All occurrences of the word in the buffer are highlighted and the substitution
+command is pre-filled with the word under the cursor.
 
-VISUAL MODE
+
+VISUAL MODE ~
 
 1. Use visual mode (`v`) to select the word(s) to replace within a _single line_
 2. Trigger the substitution with your keymap
 3. Begin typing the desired substitution and hit return
 
+All occurrences of the selected text in the buffer are highlighted and the
+substitution command is pre-filled with the selection.
 
-VISUAL LINE MODE
 
-1. Highlight word(s) to substitute with `*` or `/`
-2. Use visual line mode (`V`) to highlight the lines with the word(s) to substitute
+VISUAL LINE MODE ~
+
+1. Search for the word(s) to substitute with `*` or `/`
+2. Use visual line mode (`V`) to highlight the lines to scope the substitution to
 3. Trigger the substitution with your keymap
 4. Begin typing the desired substitution and hit return
+
+The substitution reuses your last search pattern and is scoped to the selected
+lines. The cursor is positioned in the replacement field so you can type the
+replacement immediately.
 
 
   [!TIP] The word(s) being replaced during substitution are available in the
@@ -81,7 +97,9 @@ VISUAL LINE MODE
   regex in your search patterns without extra escaping. If you need to match
   these characters literally, escape them with `\` (e.g. `\.` to match a
   period).
-  ACKNOWLEDGMENTS                    *scalpel.nvim-scalpel.nvim-acknowledgments*
+
+ACKNOWLEDGMENTS                    *scalpel.nvim-scalpel.nvim-acknowledgments*
+
 This project was inspired by Scalpel <https://github.com/wincent/scalpel>, a
 Vimscript plugin I’ve used for many years. **scalpel.nvim** is my version,
 which was reimagined and implemented in Lua for fun.
