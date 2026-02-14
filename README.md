@@ -68,6 +68,16 @@ The substitution reuses your last search pattern and is scoped to the selected l
 > [!NOTE]
 > The search pattern uses Vim's very magic mode (`\v`), so characters like `.`, `+`, `*`, and `()` are treated as regex operators. This lets you use regex in your search patterns without extra escaping. If you need to match these characters literally, escape them with `\` (e.g. `\.` to match a period).
 
+## Development
+
+Enable the local git hooks (one-time setup):
+
+```shell
+git config core.hooksPath .githooks
+```
+
+This activates a pre-commit hook that auto-generates `doc/scalpel.nvim.txt` from `README.md` whenever the README is staged. Requires [pandoc](https://pandoc.org/installing.html).
+
 ## Acknowledgments
 
 This project was inspired by [Scalpel](https://github.com/wincent/scalpel), a Vimscript plugin I've used for many years. **scalpel.nvim** is my version, which was reimagined and implemented in Lua for fun.
