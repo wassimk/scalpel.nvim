@@ -35,7 +35,7 @@ The following example shows the installation process using [lazy.nvim](https://g
 > [!NOTE]
 > You can set the keymap to anything you wish.
 
-## ✨ Usage
+## 💻 Usage
 
 ### Normal Mode
 
