@@ -4,11 +4,11 @@
 
 ![scalpel-nvim demo](scalpel.gif)
 
-## Requirements
+## 📋 Requirements
 
 - Neovim >= 0.10.0
 
-## Installation
+## 🛠️ Installation
 
 Install **scalpel.nvim** with your preferred plugin manager.
 
@@ -35,7 +35,7 @@ The following example shows the installation process using [lazy.nvim](https://g
 > [!NOTE]
 > You can set the keymap to anything you wish.
 
-## Usage
+## ✨ Usage
 
 ### Normal Mode
 
@@ -68,7 +68,7 @@ The substitution reuses your last search pattern and is scoped to the selected l
 > [!NOTE]
 > The search pattern uses Vim's very magic mode (`\v`), so characters like `.`, `+`, `*`, and `()` are treated as regex operators. This lets you use regex in your search patterns without extra escaping. If you need to match these characters literally, escape them with `\` (e.g. `\.` to match a period).
 
-## Development
+## 🔧 Development
 
 Run tests and lint:
 
@@ -85,6 +85,6 @@ git config core.hooksPath .githooks
 
 This activates a pre-commit hook that auto-generates `doc/scalpel.nvim.txt` from `README.md` whenever the README is staged. Requires [pandoc](https://pandoc.org/installing.html).
 
-## Acknowledgments
+## 🙏 Acknowledgments
 
 This project was inspired by [Scalpel](https://github.com/wincent/scalpel), a Vimscript plugin I've used for many years. **scalpel.nvim** is my version, which was reimagined and implemented in Lua for fun.
