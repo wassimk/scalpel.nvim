@@ -6,7 +6,7 @@
 
 - [VHS](https://github.com/charmbracelet/vhs#installation) (`brew install vhs`)
 - Neovim >= 0.10.0
-- [JetBrainsMono Nerd Font](https://www.nerdfonts.com/font-downloads) (optional, VHS falls back to a default font)
+- [JetBrainsMono Nerd Font](https://www.nerdfonts.com/font-downloads) (optional, the tape tries MonoLisaCode first and VHS falls back to a default font)
 - Network access on the first run, to clone [onedark.nvim](https://github.com/navarasu/onedark.nvim) into `/tmp`
 
 ## Regenerate

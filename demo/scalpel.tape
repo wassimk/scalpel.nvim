@@ -12,7 +12,7 @@ Require git
 Require bash
 
 Set Shell "bash"
-Set FontFamily "JetBrainsMono Nerd Font"
+Set FontFamily "MonoLisaCode, JetBrainsMono Nerd Font"
 Set FontSize 16
 Set Width 1000
 Set Height 640
