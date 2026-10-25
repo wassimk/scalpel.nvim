@@ -9,8 +9,9 @@ Output scalpel.gif
 
 Require nvim
 Require git
+Require bash
 
-Set Shell "zsh"
+Set Shell "bash"
 Set FontFamily "JetBrainsMono Nerd Font"
 Set FontSize 16
 Set Width 1000
